@@ -111,5 +111,6 @@ $ docker run -it --rm \
     -p 8080:8080 \
     -v /path/to/your-data:/data \
     -e SQLITE_DATABASE=db_filename.db \
-    coleifer/sqlite-web
+    -e SQLITE_WEB_PASSWORD=<YOUR PASSWORD> \
+    sqlite-web
 ```
