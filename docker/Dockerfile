@@ -28,21 +28,7 @@ ENV CFLAGS="-DSQLITE_DEFAULT_CACHE_SIZE=-8000 \
             -DSQLITE_DEFAULT_WAL_AUTOCHECKPOINT=512 \
             -DHAVE_USLEEP \
             -O2 -fPIC"
-RUN apk update \
-      && apk add --no-cache --virtual .build-deps build-base libressl coreutils gcc libc-dev linux-headers make tar wget tcl tcl-dev dpkg dpkg-dev \
-      && wget https://www.sqlite.org/src/tarball/sqlite.tar.gz?r=release -O sqlite.tar.gz -q \
-      && tar xzf sqlite.tar.gz \
-      && cd sqlite \
-      && buildArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
-      && LIBS="-lm" PREFIX="/usr/local" ./configure --build="$buildArch" --disable-tcl --enable-shared --enable-static --enable-tempstore=always --prefix="/usr/local" \
-      && make -j4 \
-      && make install \
-      && cd ../ \
-      && rm -rf ./sqlite/ ./sqlite.tar.gz \
-      && pip install --upgrade pip \
-      && pip install --no-cache-dir cython \
-      && pip install --no-cache-dir flask peewee sqlite-web \
-      && apk del .build-deps
+RUN pip install sqlite_web
 EXPOSE 8080
 VOLUME /data
 WORKDIR /data
