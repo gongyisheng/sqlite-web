@@ -28,7 +28,7 @@ ENV CFLAGS="-DSQLITE_DEFAULT_CACHE_SIZE=-8000 \
             -DSQLITE_DEFAULT_WAL_AUTOCHECKPOINT=512 \
             -DHAVE_USLEEP \
             -O2 -fPIC"
-RUN pip install sqlite_web
+RUN pip install --no-cache-dir sqlite_web
 EXPOSE 8080
 VOLUME /data
 WORKDIR /data
